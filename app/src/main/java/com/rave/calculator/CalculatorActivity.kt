@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 
 class CalculatorActivity : AppCompatActivity() {
     private lateinit var equationTv: TextView
@@ -28,6 +29,8 @@ class CalculatorActivity : AppCompatActivity() {
     private lateinit var equalsBtn: Button
     private lateinit var deleteButton: Button
     private lateinit var decimalBtn: Button
+
+    val viewModel by lazy { ViewModelProvider(this).get(CalculatorViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,15 +88,15 @@ class CalculatorActivity : AppCompatActivity() {
         equalsBtn.setOnClickListener {
             val equation = equationTv.text
             val equationList = equation.split(" ")
-            if (doesContainOperator() && equationList.size == 3 && equationList[equationList.lastIndex] != "") {
-                val result = doMath(equationList[1], equationList[0].toFloat(), equationList[2].toFloat())
+            if (viewModel.doesContainOperator(equationTv.text) && equationList.size == 3 && equationList[equationList.lastIndex] != "") {
+                val result = viewModel.doMath(equationList[1], equationList[0].toFloat(), equationList[2].toFloat())
                 answerTv.text = result
             }
         }
         deleteButton.setOnClickListener {
             val equation = equationTv.text
             val newEquation: String
-            if (doesContainOperator() && equation[equation.lastIndex].toString() == " ") {
+            if (viewModel.doesContainOperator(equationTv.text) && equation[equation.lastIndex].toString() == " ") {
                 newEquation = equation.substring(0, equation.length - 3)
                 equationTv.text = newEquation
             } else {
@@ -115,36 +118,10 @@ class CalculatorActivity : AppCompatActivity() {
     }
 
     private fun operatorButtonClicked(operator: String) {
-        if (!doesContainOperator() && equationTv.text.isNotBlank()) {
+        if (!viewModel.doesContainOperator(equationTv.text) && equationTv.text.isNotBlank()) {
             val equationString = "${equationTv.text} $operator "
             equationTv.text = equationString
         }
-    }
-
-    private fun doesContainOperator(): Boolean {
-        return equationTv.text.contains(multiply)
-                || equationTv.text.contains(divide)
-                || equationTv.text.contains(add)
-                || equationTv.text.contains(subtract)
-    }
-
-    private fun Float.toFormattedString(): String {
-        var num = this.toString()
-        if (num.endsWith(".0")) {
-            num = num.substring(0, num.length - 2)
-        }
-        return num
-    }
-
-    private fun doMath(operator: String?, num1: Float, num2: Float): String {
-        var result = 0f
-        when (operator) {
-            add -> result = num1 + num2
-            subtract -> result = num1 - num2
-            multiply -> result = num1 * num2
-            divide -> result = num1 / num2
-        }
-        return result.toFormattedString()
     }
 
     private fun clear() {
