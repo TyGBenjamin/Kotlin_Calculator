@@ -6,11 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 
-interface MyFace {
-    fun doStuff()
-}
-
-class MainActivity : AppCompatActivity(), MyFace {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,9 +22,5 @@ class MainActivity : AppCompatActivity(), MyFace {
 
     companion object {
         const val TAG = "MainActivityLogger"
-    }
-
-    override fun doStuff() {
-        TODO("Not yet implemented")
     }
 }
