@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_calculator.*
+import java.text.DecimalFormat
 
 class CalculatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +71,17 @@ class CalculatorActivity : AppCompatActivity() {
             input_display.text = addInput("*")
         }
 
+        btn_decimal.setOnClickListener{
+            input_display.text = addInput(".")
+        }
+
         btn_divide.setOnClickListener{
             input_display.text = addInput("/")
         }
         btn_equals.setOnClickListener{
             input_display.text = addInput("=")
+            input_display.text= ""
+            doMath()
         }
 
         btn_plus.setOnClickListener{
@@ -87,6 +94,26 @@ class CalculatorActivity : AppCompatActivity() {
     }
     private fun addInput(buttonValue:String): String{
         return "${input_display.text}$buttonValue"
+    }
+
+    private fun getOperator(): String{
+        var expression = input_display.text.replace(Regex("+"), "/")
+        expression = expression.replace(Regex("x"), "*")
+        return expression
+    }
+
+    private fun doMath(){
+        try{
+            val expression = getOperator()
+            val result = Expression(expression).calculate()
+            if(result.isNan()){}
+            else{
+                output_display.text = DecimalFormat("0.###").format(result).toString()
+            }
+        } catch (e: Exception){
+
+        }
+
     }
 
     companion object{
