@@ -23,15 +23,16 @@
         android:gravity="end"
         android:textSize="30sp"
         android:textColor="@color/white"
-        tools:text="9+9"/>
+        tools:text=""/>
 
         <TextView
+            android:id="@+id/result_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="50sp"
             android:textColor="@color/teal_700"
-            tools:text="9+9"/>
+            tools:text=""/>
     </LinearLayout>
 
     <TableLayout
@@ -39,7 +40,8 @@
         android:layout_height="wrap_content"
         android:stretchColumns="*">
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/row_1">
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -49,13 +51,13 @@
                 style="@style/Grid_Style"
                 android:text="C"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_leftParanthesis"
+                android:id="@+id/btn_leftParenthesis"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 style="@style/Grid_Style"
                 android:text="("/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_rightParanthesis"
+                android:id="@+id/btn_rightParenthesis"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 style="@style/Grid_Style"
@@ -68,7 +70,8 @@
                 android:text="-"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/row_2">
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -97,7 +100,8 @@
                 android:text="+"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/row_3">
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -106,7 +110,7 @@
                 android:layout_height="90dp"
                 style="@style/Grid_Style"
                 android:text="4"/>
-            <androidx.appcompat.widget.AppCompatButton                android:id="@+id/btn_8"
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_5"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -125,7 +129,8 @@
                 style="@style/Grid_Style"
                 android:text="/"/>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:id="@+id/row_4">
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -153,7 +158,8 @@
                 style="@style/Grid_Style"
                 android:text="*"/>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:id="@+id/row_5">
 
 
             <androidx.appcompat.widget.AppCompatButton
