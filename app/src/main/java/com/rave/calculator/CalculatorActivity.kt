@@ -30,7 +30,7 @@ class CalculatorActivity : AppCompatActivity() {
     private lateinit var deleteButton: Button
     private lateinit var decimalBtn: Button
 
-    val viewModel by lazy { ViewModelProvider(this).get(CalculatorViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(CalculatorViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
