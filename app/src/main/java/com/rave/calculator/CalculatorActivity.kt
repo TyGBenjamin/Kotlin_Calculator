@@ -106,7 +106,9 @@ class CalculatorActivity : AppCompatActivity() {
         try{
             val expression = getOperator()
             val result = Expression(expression).calculate()
-            if(result.isNan()){}
+            if(result.isNan()){
+                println("hello")
+            }
             else{
                 output_display.text = DecimalFormat("0.###").format(result).toString()
             }
@@ -115,6 +117,8 @@ class CalculatorActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     companion object{
         const val TAG="CalculatorActivityLog"
