@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_calculator.*
-import org.mariuszgromada.math.mxparser.Expression
 import java.text.DecimalFormat
 
 class CalculatorActivity : AppCompatActivity() {
@@ -32,7 +31,6 @@ class CalculatorActivity : AppCompatActivity() {
 
         btn_leftParenthesis.setOnClickListener {
             input_display.text = addInput("(")
-            output_display.text = ""
         }
 
         btn_rightParenthesis.setOnClickListener {
@@ -41,76 +39,66 @@ class CalculatorActivity : AppCompatActivity() {
 
         btn_0.setOnClickListener {
             input_display.text = addInput("0")
-            output_display.text = ""
             numberAdded(0f)
         }
 
         btn_1.setOnClickListener {
             input_display.text = addInput("1")
-            output_display.text = ""
             numberAdded(1f)
         }
 
         btn_2.setOnClickListener {
             input_display.text = addInput("2")
-            output_display.text = ""
             numberAdded(2f)
         }
 
         btn_3.setOnClickListener {
             input_display.text = addInput("3")
-            output_display.text = ""
             numberAdded(3f)
         }
 
         btn_4.setOnClickListener {
             input_display.text = addInput("4")
-            output_display.text = ""
             numberAdded(4f)
         }
 
         btn_5.setOnClickListener {
             input_display.text = addInput("5")
-            output_display.text = ""
             numberAdded(5f)
         }
 
         btn_6.setOnClickListener {
             input_display.text = addInput("6")
-            output_display.text = ""
             numberAdded(6f)
         }
 
         btn_7.setOnClickListener {
             input_display.text = addInput("7")
-            output_display.text = ""
         }
 
         btn_8.setOnClickListener {
             input_display.text = addInput("8")
-            output_display.text = ""
             numberAdded(8f)
         }
 
         btn_9.setOnClickListener {
             input_display.text = addInput("9")
-            output_display.text = ""
             numberAdded(9f)
         }
 
         btn_multiply.setOnClickListener {
-            input_display.text = addInput("*")
+            input_display.text = addInput(" * ")
             operatorAdded(multiply)
         }
 
         btn_plus.setOnClickListener {
-            input_display.text = addInput("+")
+            input_display.text = addInput(" + ")
             operatorAdded(add)
 
         }
 
         btn_minus.setOnClickListener {
-            input_display.text = addInput("-")
+            input_display.text = addInput(" - ")
             operatorAdded(subtract)
 
         }
@@ -121,13 +109,13 @@ class CalculatorActivity : AppCompatActivity() {
         }
 
         btn_divide.setOnClickListener {
-            input_display.text = addInput("/")
+            input_display.text = addInput(" / ")
             operatorAdded(divide)
 
         }
         btn_equals.setOnClickListener {
             val equation = input_display.text
-            val equationList = equation.split("")
+            val equationList = equation.split(" ")
             if (doesContainOperator() && equationList.size == 3 && equationList[equationList.lastIndex] != "") {
                 val result =
                     doMath(equationList[1], equationList[0].toFloat(), equationList[2].toFloat())
@@ -139,11 +127,11 @@ class CalculatorActivity : AppCompatActivity() {
 
     }
     private fun numberAdded (number: Float){
-        if (output_display.text.isNotBlank()){
-            output_display.text=""
-        }
-        val updatedText = "${input_display.text}"
-        output_display.text= updatedText
+//        if (output_display.text.isNotBlank()){
+//            output_display.text=""
+//        }
+//        val updatedText = "${input_display.text}"
+//        output_display.text= updatedText
     }
 
     private fun operatorAdded(operator: String) {
@@ -161,13 +149,7 @@ class CalculatorActivity : AppCompatActivity() {
 
     }
 
-    private fun Float.toFormattedString(): String {
-        var num = this.toString()
-        if (num.endsWith(".0")) {
-            num = num.substring(0, num.length - 2)
-        }
-        return num
-    }
+
 
 
     private fun doMath(operator: String?, num1: Float, num2: Float): String {
